@@ -14,29 +14,53 @@ const DATA = [
   {
     id: '1',
     image: require('./assets/1.jpg'),
-    title: 'First Location'
+    title: 'First Location',
+    location: "Dubai",
   },
   {
     id: '2',
     image: require('./assets/2.jpg'),
-    title: 'Second Location'
+    title: 'Second Location',
+    location: "New York",
   },
   {
     id: '3',
     image: require('./assets/3.jpg'),
-    title: 'Third Location'
+    title: 'Third Location',
+    location: "Tehran",
   },
   {
     id: '4',
     image: require('./assets/4.jpg'),
-    title: 'Fourth Location'
+    title: 'Fourth Location',
+    location: "London",
   },
   {
     id: '5',
     image: require('./assets/5.jpg'),
-    title: 'Fifth Location'
+    title: 'Fifth Location',
+    location: "Helsinki",
   },
 ]
+
+const HeaderBar = ({ scrollXAnimated }) => {
+  return (
+    <FlatList data={DATA}
+      keyExtractor={item => item.id}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      scrollEnabled={false}
+      contentContainerStyle={styles.listContainer}
+      renderItem={({ item }) => {
+        return <Animated.View style={styles.headerItemWrapper}>
+          <Text style={styles.headerItemTitle}>
+            {item.title}
+          </Text>
+        </Animated.View>
+      }}
+    />
+  )
+}
 
 export default function App() {
   const scrollXIndex = React.useRef(new Animated.Value(0)).current;
@@ -73,6 +97,7 @@ export default function App() {
           }
         }}>
         <SafeAreaView style={styles.container}>
+          <HeaderBar scrollXAnimated={scrollXAnimated} />
           <FlatList
             contentContainerStyle={{
               flex: 1,
@@ -155,6 +180,20 @@ const styles = StyleSheet.create({
     bottom: 20,
     left: 20,
     color: '#fff',
+    fontSize: 22,
+    fontWeight: '900'
+  },
+  listContainer: {
+    backgroundColor: 'blue', position: 'absolute', top: 40,
+    left: 20,
+  },
+  headerItemWrapper: {
+    width,
+
+    backgroundColor: 'red'
+  },
+  headerItemTitle: {
+    color: '#000000',
     fontSize: 22,
     fontWeight: '900'
   }
